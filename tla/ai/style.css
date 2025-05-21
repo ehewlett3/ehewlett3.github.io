@@ -25,14 +25,18 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--light-color);
+    background: url('grass-background.png') no-repeat center center fixed;
+    background-size: cover;
     overflow-x: hidden;
+    min-height: 100%;
+    position: relative;
 }
 
 a {
@@ -78,6 +82,8 @@ img {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .highlight {
@@ -90,12 +96,14 @@ img {
 
 /* Header & Navigation */
 header {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.85);
     box-shadow: var(--shadow);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 nav {
@@ -148,13 +156,18 @@ nav {
     display: flex;
     min-height: 100vh;
     padding: 8rem 2rem 5rem;
-    background: var(--light-color);
     align-items: center;
+    position: relative;
 }
 
 .hero-content {
     flex: 1;
-    padding-right: 2rem;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .hero-content p {
@@ -213,11 +226,24 @@ nav {
 /* Section Styling */
 .section {
     padding: var(--section-padding);
+    position: relative;
+}
+
+.section .container {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .alt-bg {
-    background-color: var(--dark-color);
     color: var(--light-text);
+}
+
+.alt-bg .container {
+    background-color: rgba(34, 38, 57, 0.85);
 }
 
 .section-description {
@@ -264,11 +290,13 @@ nav {
 }
 
 .applet-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
 
 .applet-card:hover {
@@ -347,10 +375,12 @@ nav {
 
 /* Footer */
 footer {
-    background-color: var(--dark-color);
+    background-color: rgba(34, 38, 57, 0.85);
     color: var(--light-text);
     padding: 3rem 0;
     text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .footer-links {
