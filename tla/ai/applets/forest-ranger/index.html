@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forest Adventure</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      border: 2px solid #444;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Load images
+    const backgroundImage = new Image();
+    backgroundImage.src = 'forest.png';
+
+    const rangerImage = new Image();
+    rangerImage.src = 'ranger.png';
+
+    // Ranger attributes (base size)
+    const baseWidth = 32;
+    const baseHeight = 32;
+    const maxY = canvas.height - baseHeight;            // bottom of path
+    const pathTopY = 350;               // top of path
+    const ranger = {
+      x: canvas.width / 2 - baseWidth * 3,
+      y: maxY,
+      speed: 2
+    };
+
+    // Scaling parameters
+    const minScale = 1.0;  // at top of path
+    const maxScale = 3.0;  // at bottom of path (increased for bigger scaling)
+    const centerX = canvas.width / 2;
+    const pathTopWidth = 100;
+    const pathBottomWidth = 400;
+
+    // Handle keyboard input
+    const keys = {};
+    window.addEventListener('keydown', (e) => { keys[e.key] = true; });
+    window.addEventListener('keyup', (e) => { keys[e.key] = false; });
+
+    function getAllowedX(y) {
+      // Interpolate path width between top and bottom based on y within [pathTopY, maxY]
+      const rangeY = maxY - pathTopY;
+      const t = (y - pathTopY) / rangeY;
+      const width = pathTopWidth + t * (pathBottomWidth - pathTopWidth);
+      return {
+        left: centerX - width / 2,
+        right: centerX + width / 2 - baseWidth
+      };
+    }
+
+    function update() {
+      let newX = ranger.x;
+      let newY = ranger.y;
+      if (keys['ArrowLeft'] || keys['a']) {
+        newX -= ranger.speed;
+      }
+      if (keys['ArrowRight'] || keys['d']) {
+        newX += ranger.speed;
+      }
+      if (keys['ArrowUp'] || keys['w']) {
+        newY -= ranger.speed;
+      }
+      if (keys['ArrowDown'] || keys['s']) {
+        newY += ranger.speed;
+      }
+
+      // Clamp newY within path vertical bounds
+      newY = Math.max(pathTopY, Math.min(newY, maxY));
+
+      // Determine allowed X range based on newY
+      const { left, right } = getAllowedX(newY);
+      newX = Math.max(left, Math.min(newX, right));
+
+      ranger.x = newX;
+      ranger.y = newY;
+    }
+
+    function draw() {
+      // Draw background
+      ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+      // Calculate scale based on y (closer to bottom = larger)
+      const rangeY = maxY - pathTopY;
+      const t = (ranger.y - pathTopY) / rangeY;
+      const scale = minScale + t * (maxScale - minScale);
+      const scaledWidth = baseWidth * scale;
+      const scaledHeight = baseHeight * scale;
+
+      // Adjust position so feet stay on the path
+      const footY = ranger.y + baseHeight;
+      const drawX = ranger.x + baseWidth / 2 - scaledWidth / 2;
+      const drawY = footY - scaledHeight;
+
+      ctx.drawImage(rangerImage, drawX, drawY, scaledWidth, scaledHeight);
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Start game when assets are loaded
+    let assetsLoaded = 0;
+    const totalAssets = 2;
+    backgroundImage.onload = () => { assetsLoaded++; if (assetsLoaded === totalAssets) gameLoop(); };
+    rangerImage.onload = () => { assetsLoaded++; if (assetsLoaded === totalAssets) gameLoop(); };
+  </script>
+</body>
+</html>
