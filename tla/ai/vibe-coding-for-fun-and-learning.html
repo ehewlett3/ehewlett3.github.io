@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & AI-Generated Applets</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Explore artificial intelligence and AI-generated applets">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">AI & AI Applets</div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../index.html">TLA Projects</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#applets">Applets</a></li>
+                <li><a href="index.html#resources">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+       <section id="blog" class="section">
+            <div class="container">
+                <h2><span class="highlight">"Vibe"</span> Coding</h2>
+                
+                <div class="blog-posts">
+                    <!-- Blog Post 1 -->
+                    <article class="blog-post">
+                        <div class="post-header">
+                            <h3>"Vibe Coding" for Fun and Learning</h3>
+                            <div class="post-meta">
+                                <span class="post-date">May 23, 2025</span>
+                                <span class="post-category">Coding</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>One of the first uses for the new Large Language Model (LLM) AIs, after the generation of human-readable text, has been the generation of computer code. This makes sense. There is probably as large a body of "open source" code out there and available as text to train on as there is human-language documents, and programming languages are a lot more structured and a lot less ambiguous than human languages, making programming a task that LLM AIs are potentially very well suited for.</p>
+
+                            <p>That being said, while there are plenty of pretty standard algorithms (logically structured programmable work-flows) that AIs can very easily reproduce, the logical, organized, and creative thought required to plan and create a large application has not been something any of the LLM AIs were capable of until fairly recently. And, while they're still not great at doing exactly what we ask of them (<a href="https://blog.ehewlett.net/2024/07/the-stellar-empires-project-part-iii.html" target="_blank">I still haven't managed to get an AI to translate my favourite TRS-80 Color Computer BASIC game for me!</a>), a growing number of programmers are starting to embrace the chaos inherent in getting the AI to create complete programs, and they've even come up with a name for it: "vibe coding"!</p>
+
+                            <img src="vibecoding.png" alt="Vibe Coding" class="blog-img">
+                            <p>The idea behind "vibe coding" seems to be, on the one hand, to craft a prompt good enough to get the AI to create an actual working program for you that more or less does what you want it to, and, on the other hand, to embrace this necessary "more or less" aspect of AI coding and, instead of trying to force the AI to do exactly what you want it to, to take what the AI has produced and tweak and/or just run with it.</p>
+
+                            <p id="jump">So, I've been meaning to try some "vibe coding" since the term was first coined, this last February, and, at the recent educational conference at which I presented on "Twelve Years of Teaching with Raspberry Pi", I finally got an opportunity to try it. And it works! Sometimes. And, given that my primary test-projects have been to get the AI to generate interactive educational applets that might well be useful to non-coding homeschooling parents, I thought I would share some of my preliminary results here with you.</p>
+
+                            <p>My first thought, as a computer science teacher, was to get an AI to come up with an applet that I could use to teach my students the binary and hexadecimal number systems. Computers are, after all, pretty good at math, so it seemed to make sense that a computer should be able to do a better job of demonstrating how number systems work than my usual approach of typing out binary and hexadecimal numbers in Notepad.</p>
+                            
+                            <p>The first response to my intial prompt wasn't much more than a binary/hex-to-decimal number converter, which, while helpful, wasn't much more helpful than the calculator built into pretty much any operating system (if you know where to look). The AI's attempt to "gamify" the app (which it suggested it do) wasn't much better, producing a rather boring quiz that any observant student could easily get perfect marks on just by using the built-in binary/hex number converter! <a href="https://chatgpt.com/share/682eba27-bdf4-8010-a0b3-2c0272e62365" target="_blank"><button class="small-button">View full ChatGPT session</button></a></p>
+
+                            <p>So, I switched gears, and started a new conversation, this time getting the AI to first create a whole lesson plan to teach how binary, decimal, and hexadecimal work, and then following this up, in the same conversation, with a prompt to "Create a single HTML file using JavaScript and CSS that teaches all these concepts interactively, step-by-step." I was using ChatGPT version 4o, and I suppose, in retrospect, that the initial planning step ended up making my prompt somewhat similar to the newer "reasoning" AIs, because the result rather blew me away! <a href="https://chatgpt.com/share/682ebb56-4868-8010-af7f-a763d2be9715" target="_blank"><button class="small-button">View full ChatGPT session</button></a></p>
+
+                            <p>It's worth noting that the first part of my prompt ("Create a single HTML file... <i>[etc.]</i>") was gleaned from a YouTuber who regularly reports on AI that I watch regularly. It's a classic web-developer trick that turns a single web-page (HTML file) into a nice-looking (using CSS) interactive application (written in JavaScript) that you can easily download and deploy in almost any learning management system that lets you create web-pages and gives you the ability to edit that page's underlying HTML code. (More on this later!)</p>
+
+                            <a href="https://code.eh3.ca/Number-Systems-Applet/" target="_blank"><img src="https://github.com/ehewlett3/Number-Systems-Applet/blob/main/Screenshot.png?raw=true" alt="Screenshot of the Number Systems Applet" class="blog-img"></a>
+                            <p>Anyhow, while the applet that ChatGPT created for me wasn't quite the full-fledged interactive lesson that I was envisioning, it <i>was</i> a very neat and helpful tool that, with a little tweaking, I'll be more than happy to use as I'm teaching to help my students visualize how binary and hexadecimal number systems work, and then give them access to it so they can play around with it and learn experientially how those systems work!</p>
+
+                            <p>The next step was to see if this new interactive learning tool could be integrated into our learning management system (LMS), Brightspace. And it could! Fortunately, our LMS allows teachers to make web-pages, usually used for presenting information and activities, and then to edit the underlying HTML - and, importantly, it doesn't edit out JavaScript code as some LMSs do, as "dangerous". It took a bit of tweaking and rearranging of the underlying code (more on this later), but it worked! While I don't yet have a way to integrate such activities more closely, such that I could assign them a mark based on their interactions with it, that wasn't actually the point of this activity. This applet was really just an interactive "toy", which is actually my favourite sort of learning tool!</p>
+
+                            <p>And, the ease with which I was able to make this educational "toy" in collaboration with AI is the main reason I'm presenting this here, to my fellow tech-savvy teachers and parents. One of the most effective approaches to teaching is to make it interactive (so students can "play around" with it) and fun (so they can learn by playing). And, while not everyone is going to find an interactive lesson on base-2, -10, and -16 number systems "fun", the process of creating a fully interactive lesson just became a whole lot easier with AI!</p>
+
+                            <p>Which makes the next step in this adventure, using AI to make <i>more</i> educational applets to see if this is extensible... which is the point of this site. My intent here is to use "vibe coding", experimenting with various available AIs to make more educational applets, post them here, and document the process of making them and using them, and make them available to you. Because knowledge and information and learning - and interactive learning tools! - ought to be shared.</p>
+
+                            <p>So, here on this site, you'll find a variety of educational applets <a href="#applets"><button class="small-button">here</button></a>, in a variety of useable states. I'll try to document, in the GitHub README for each (click the "Get the code" link), the prompts and/or processes by which I produced them, along with the degree to which each has been vetted/tested, and how they can be integrated into an LSM like Brightspace (which I'll prioritize simply because it's the one we use).</p>
+
+                            <p>My intent here is for this post and this site to be simultaneously experimental and useful and, hopefully, inspirational. One of my ideals in learning is to keep it <i>fun</i> - it's so easy for the process of learning to suck all they joy out of it! - so anything which makes it easier to give students more educational "toys" to play with should not only be used, but used widely.</p>
+
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-tags">
+                                <span>Educational Applets</span>
+                                <span>GPT</span>
+                                <span>Coding</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Edward Hewlett. All rights reserved.</p>
+<!--            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Contact</a>
+            </div> -->
+        </div>
+    </footer>
+
+</body>
+</html>
